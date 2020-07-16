@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  gitlab-board:
+    container_name: gitlab-board
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/app/
+    environment:
+      - PRIVATE_TOKEN=YOUR_API_KEY
+      - GITLAB_URL=https://gitlab.com/
+    ports:
+      - 8005:8005
