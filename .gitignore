@@ -241,3 +241,5 @@ pip-selfcheck.json
 
 temp.*
 django_warning_logs.log
+
+docker-compose.yml
