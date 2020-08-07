@@ -82,4 +82,3 @@ class GroupModel(BaseModel):
     web_url: HttpUrl
     name: str
     projects: Optional[List[ProjectModel]] = None
-    boards: Optional[List[BoardModel]] = None
