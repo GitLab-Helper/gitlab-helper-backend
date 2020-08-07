@@ -1,6 +1,6 @@
 # Changelog
 
-## [0.2.0] - 
+## [0.2.0] - 2020-08-07
 ### Added
 - Add changelog.
 - Add settings stored in config.py file.
