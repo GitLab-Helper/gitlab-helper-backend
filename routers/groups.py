@@ -2,7 +2,7 @@ import json
 from typing import List
 
 import requests
-from fastapi import APIRouter, Path, Depends
+from fastapi import APIRouter, Depends
 from pydantic.types import PositiveInt
 
 from dependencies.auth import get_token
