@@ -57,7 +57,7 @@ def read_group_members(
     return [member_mapping(member) for member in members]
 
 
-@router.get("/groups/{group_id}/issues/", response_model=List[IssueModel])
+@router.get("/{group_id}/issues/", response_model=List[IssueModel])
 def read_group_issues(
         token: TokenData = Depends(get_token),
         group_id: int = Path(..., title="Group_id", description="Id of gitlab group"),
