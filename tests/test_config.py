@@ -14,7 +14,7 @@ def test_fernet_key_default_value():
 
 
 def test_access_token_algorithm_default_value():
-    assert settings.access_token_algorithm is "HS256"
+    assert settings.access_token_algorithm == "HS256"
 
 
 def test_access_token_expire_minutes_default_value():
