@@ -1,5 +1,9 @@
-from fastapi import Query, HTTPException
+from fastapi import Query, HTTPException, Path
 from pydantic.types import PositiveInt
+
+
+def group_id_parameter(group_id: PositiveInt = Path(..., title="Group_id", description="Id of gitlab group")):
+    return group_id
 
 
 class IssueQueryChecker:

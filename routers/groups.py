@@ -3,9 +3,10 @@ from typing import List
 
 import requests
 from fastapi import APIRouter, Path, Depends
+from pydantic.types import PositiveInt
 
 from dependencies.auth import get_token
-from dependencies.groups import IssueQueryChecker
+from dependencies.groups import IssueQueryChecker, group_id_parameter
 from models.auth import TokenData
 from models.groups import GroupModel, MemberModel, LabelModel, BoardModel, IssueModel
 
@@ -28,7 +29,7 @@ def read_groups(token: TokenData = Depends(get_token)):
 @router.get("/{group_id}/", response_model=GroupModel, response_model_exclude_unset=True)
 def read_group(
         token: TokenData = Depends(get_token),
-        group_id: int = Path(..., title="Group_id", description="Id of gitlab group"),
+        group_id: PositiveInt = Depends(group_id_parameter, use_cache=False),
 ):
     response = requests.get(f"{token.app_url}/api/v4/groups/{group_id}", headers=authorization_header(token.api_key))
     group = json.loads(response.text)
@@ -38,7 +39,7 @@ def read_group(
 @router.get("/{group_id}/boards/", response_model=List[BoardModel], response_model_exclude_unset=True)
 def read_group_boards(
         token: TokenData = Depends(get_token),
-        group_id: int = Path(..., title="Group_id", description="Id of gitlab group"),
+        group_id: PositiveInt = Depends(group_id_parameter, use_cache=False),
 ):
     response = requests.get(f"{token.app_url}/api/v4/groups/{group_id}/boards",
                             headers=authorization_header(token.api_key))
@@ -49,7 +50,7 @@ def read_group_boards(
 @router.get("/{group_id}/members/", response_model=List[MemberModel], response_model_exclude_unset=True)
 def read_group_members(
         token: TokenData = Depends(get_token),
-        group_id: int = Path(..., title="Group_id", description="Id of gitlab group"),
+        group_id: PositiveInt = Depends(group_id_parameter, use_cache=False),
 ):
     response = requests.get(f"{token.app_url}/api/v4/groups/{group_id}/members",
                             headers=authorization_header(token.api_key))
@@ -60,7 +61,7 @@ def read_group_members(
 @router.get("/{group_id}/issues/", response_model=List[IssueModel], response_model_exclude_unset=True)
 def read_group_issues(
         token: TokenData = Depends(get_token),
-        group_id: int = Path(..., title="Group_id", description="Id of gitlab group"),
+        group_id: PositiveInt = Depends(group_id_parameter, use_cache=False),
         query_string: str = Depends(issue_params_checker)
 ):
     url = f"{token.app_url}/api/v4/groups/{group_id}/issues{query_string}"
@@ -72,7 +73,7 @@ def read_group_issues(
 @router.get("/{group_id}/labels/", response_model=List[LabelModel], response_model_exclude_unset=True)
 def read_group_labels(
         token: TokenData = Depends(get_token),
-        group_id: int = Path(..., title="Group_id", description="Id of gitlab group"),
+        group_id: PositiveInt = Depends(group_id_parameter, use_cache=False),
 ):
     response = requests.get(f"{token.app_url}/api/v4/groups/{group_id}/labels",
                             headers=authorization_header(token.api_key))
