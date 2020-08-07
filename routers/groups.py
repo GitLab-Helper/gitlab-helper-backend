@@ -107,7 +107,7 @@ checker = IssueQueryChecker(state=["opened", "closed"],
                                       "label_priority", "milestone_due", "popularity", "weight"])
 
 
-@router.get("/groups/{group_id}/issues/", response_model=List[IssueModel], response_model_exclude_unset=True)
+@router.get("/{group_id}/issues/", response_model=List[IssueModel], response_model_exclude_unset=True)
 def read_group_issues(
         token: TokenData = Depends(get_token),
         group_id: int = Path(..., title="Group_id", description="Id of gitlab group"),
