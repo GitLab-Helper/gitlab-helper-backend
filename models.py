@@ -1,4 +1,4 @@
-from typing import List, Optional
+from typing import List, Optional, Union
 
 from pydantic import BaseModel, HttpUrl, PositiveInt
 
@@ -32,22 +32,6 @@ class ReferencesModel(BaseModel):
     full: str
 
 
-class IssueModel(BaseModel):
-    id: PositiveInt
-    title: str
-    description: str
-    created_at: str
-    updated_at: str
-    left_side: Optional[str]
-    right_side: Optional[str]
-    labels: List[str]
-    assignees: List[UserModel]
-    author: UserModel
-    web_url: HttpUrl
-    time_stats: TimeStatsModel
-    references: ReferencesModel
-
-
 class LabelModel(BaseModel):
     id: PositiveInt
     name: str
@@ -55,6 +39,22 @@ class LabelModel(BaseModel):
     text_color: str
     description: Optional[str] = None
     description_html: Optional[str] = None
+
+
+class IssueModel(BaseModel):
+    id: PositiveInt
+    title: str
+    description: Optional[str]
+    created_at: str
+    updated_at: str
+    left_side: Optional[str]
+    right_side: Optional[str]
+    labels: Union[List[str], List[LabelModel]]
+    assignees: List[UserModel]
+    author: UserModel
+    web_url: HttpUrl
+    time_stats: TimeStatsModel
+    references: ReferencesModel
 
 
 class MemberModel(BaseModel):
@@ -82,4 +82,3 @@ class GroupModel(BaseModel):
     web_url: HttpUrl
     name: str
     projects: Optional[List[ProjectModel]] = None
-    boards: Optional[List[BoardModel]] = None
