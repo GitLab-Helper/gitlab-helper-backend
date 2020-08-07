@@ -2,7 +2,7 @@ from config import settings
 
 
 def test_app_name_default_value():
-    assert settings.app_name == "Gitlab Helper"
+    assert settings.app_name == "GitLab Helper"
 
 
 def test_secret_key_default_value():
