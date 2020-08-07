@@ -10,7 +10,7 @@ def test_secret_key_default_value():
 
 
 def test_fernet_key_default_value():
-    assert settings.fernet_key == bytes("default_fernet_key", "utf-8")
+    assert settings.fernet_key == bytes("cXwcpWMkuwmtsXGDJCId7eL3evbMq26pDxZMDt2tI8I=", "utf-8")
 
 
 def test_access_token_algorithm_default_value():
