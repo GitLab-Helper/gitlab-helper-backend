@@ -11,6 +11,7 @@
 ### Changed
 - Application has been split into multiple files instead of one main.py file.
 - Changed port from 8005 to 8000.
+- Add FastApi version
 
 ## [0.1.0] - 2020-08-05
 ### Added
