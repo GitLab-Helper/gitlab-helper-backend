@@ -4,7 +4,7 @@ from pydantic import BaseSettings
 
 
 class Settings(BaseSettings):
-    app_name: str = os.getenv("APP_NAME", "Gitlab Helper")
+    app_name: str = os.getenv("APP_NAME", "GitLab Helper")
     secret_key: str = os.getenv("SECRET_KEY", "default_secret_key")
     fernet_key: bytes = bytes(os.getenv("FERNET_KEY", "cXwcpWMkuwmtsXGDJCId7eL3evbMq26pDxZMDt2tI8I="), "utf-8")
 
