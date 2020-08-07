@@ -5,7 +5,7 @@ from starlette.middleware.cors import CORSMiddleware
 
 from routers import auth, groups
 
-app = FastAPI(root_path="/api", version="0.2.0")
+app = FastAPI(root_path="/api", version="0.2.1")
 
 origins = [os.getenv("URL", "*")]
 

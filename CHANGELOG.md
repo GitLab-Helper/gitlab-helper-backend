@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.1] -
+### Added
+- Additional query params for issue route.
+
+### Changed
+- Replaced python-gitlab packaged with requests straight to gitlab api.
+- Refactored application structure
+
 ## [0.2.0] - 2020-08-07
 ### Added
 - Add changelog.
