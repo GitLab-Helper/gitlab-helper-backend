@@ -10,6 +10,7 @@ from starlette import status
 from config import settings
 from dependencies.auth import GitlabAPiKeyRequestForm, encrypt, get_refresh_token
 from models.auth import TokenData, Token
+from models.core import ErrorResponse
 
 router = APIRouter()
 
@@ -42,7 +43,17 @@ def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
     return encoded_jwt
 
 
-@router.post("/token", response_model=Token, summary="Authorization of gitlab service")
+@router.post(
+    "/token",
+    response_model=Token,
+    summary="Authorization of gitlab service",
+    responses={
+        401: {
+            "model": ErrorResponse,
+            "description": "Unauthorized",
+        }
+    }
+)
 async def get_gitlab_token(form_data: GitlabAPiKeyRequestForm = Depends()):
     gitlab = authenticate_gitlab(form_data.app_url, form_data.api_key)
     access_token_expires = timedelta(minutes=settings.access_token_expire_minutes)
@@ -59,7 +70,17 @@ async def get_gitlab_token(form_data: GitlabAPiKeyRequestForm = Depends()):
             "expires_in": settings.access_token_expire_minutes, "refresh_token": refresh_token}
 
 
-@router.post("/refresh_token", response_model=Token, summary="Refresh authorization token with refresh token")
+@router.post(
+    "/refresh_token",
+    response_model=Token,
+    summary="Refresh authorization token with refresh token",
+    responses={
+        401: {
+            "model": ErrorResponse,
+            "description": "Unauthorized",
+        }
+    }
+)
 async def get_refresh_gitlab_token(token: TokenData = Depends(get_refresh_token)):
     access_token_expires = timedelta(minutes=settings.access_token_expire_minutes)
     access_token = create_access_token(
