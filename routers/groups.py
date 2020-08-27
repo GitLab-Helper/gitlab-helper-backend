@@ -36,7 +36,7 @@ def read_group(
     return group
 
 
-@router.get("/{group_id}/boards/", response_model=List[BoardModel], response_model_exclude_unset=True)
+@router.get("/{group_id}/boards/", response_model=List[BoardModel])
 def read_group_boards(
         token: TokenData = Depends(get_token),
         group_id: PositiveInt = Depends(group_id_parameter, use_cache=False),

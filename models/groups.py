@@ -69,11 +69,12 @@ class MemberModel(BaseModel):
 class ListModel(BaseModel):
     id: PositiveInt
     label: LabelModel
-    position: PositiveInt
+    position: int
 
 
 class BoardModel(BaseModel):
     id: PositiveInt
+    name: Optional[str] = "Development"
     lists: List[ListModel]
 
 
@@ -81,4 +82,4 @@ class GroupModel(BaseModel):
     id: PositiveInt
     web_url: HttpUrl
     name: str
-    projects: Optional[List[ProjectModel]] = None
+    projects: Optional[List[ProjectModel]] = []
